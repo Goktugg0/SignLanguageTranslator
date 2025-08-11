@@ -5,7 +5,10 @@ cap = cv.VideoCapture(0)
 
 while True:
     ret, frame = cap.read()
-    cv.imshow('frame', frame)
+
+    flipped = cv.flip(frame,1)
+    
+    cv.imshow('frame', flipped)
 
     if cv.waitKey(1) == ord('q'):
         break
