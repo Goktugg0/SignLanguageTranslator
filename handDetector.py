@@ -9,7 +9,7 @@ hands = mpHands.Hands(static_image_mode=False,
                       min_detection_confidence=0.5,
                       min_tracking_confidence=0.5
                       )
-
+mp_draw = mp.solutions.drawing_utils  # For drawing landmarks
 
 while True:
     ret, frame = cap.read()
@@ -17,11 +17,14 @@ while True:
     mirrored_frame = cv.flip(frame, 1)
 
     # Convert BGR (OpenCV format) to RGB (MediaPipe format)
-    frameRGB = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
+    frameRGB = cv.cvtColor(mirrored_frame, cv.COLOR_BGR2RGB)
     # Process with the hands
     results = hands.process(frameRGB)
-
     print(results.multi_hand_landmarks)
+    if results.multi_hand_landmarks:
+        for land_marks in results.multi_hand_landmarks:
+            mp_draw.draw_landmarks(mirrored_frame, land_marks, mpHands.HAND_CONNECTIONS)
+
 
     cv.imshow('frame', mirrored_frame)
 
