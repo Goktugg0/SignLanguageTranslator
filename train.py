@@ -16,40 +16,43 @@ data = Path("sign_data.csv")
 
 df = pd.read_csv(data)
 
-# Features = all columns except "label"
-X = df.drop("label", axis=1).values
+# Select only the first 63 columns (21 hand landmarks × 3 coordinates)
+X = df.iloc[:, 1:64].values
+
 # Labels
 y = df["label"].values
 
-# Initialize and fit LabelEncoder
+# Encode labels
 le = LabelEncoder()
 y_encoded = le.fit_transform(y)
 
+# Scale features
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
+# Split into train and test
 X_train, X_test, y_train, y_test = train_test_split(X_scaled, y_encoded, test_size=0.2, random_state=42)
-
-print(np.unique(y_train, return_counts=True))
-print(np.unique(y_test, return_counts=True))
-
 
 
 model = Sequential([
-    Dense(16, activation='relu', input_shape=(189,)),
-    Dense(32, activation='relu'),
+    Dense(512, activation='relu', input_shape=(63,)),
+    Dropout(0.3),
+    Dense(256, activation='relu'),
+    Dropout(0.3),
+    Dense(128, activation='relu'),
     Dense(len(le.classes_), activation='softmax')
 ])
 
+model.compile(loss="sparse_categorical_crossentropy", optimizer=Adam(0.0001), metrics=["accuracy"])
 
-model.compile(loss="sparse_categorical_crossentropy", optimizer=Adam(0.00001), metrics=["accuracy"])
-
+early_stop = EarlyStopping(monitor='val_loss', patience=20, restore_best_weights=True)
 
 fitting = model.fit(
     X_train, y_train,
     validation_data=(X_test, y_test),
     batch_size=16,
-    epochs=30,
+    epochs=500,
     shuffle=True,
-    verbose=2,
+    callbacks=[early_stop],
+    verbose=2
 )
