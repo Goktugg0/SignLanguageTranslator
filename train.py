@@ -1,3 +1,4 @@
+import pickle
 from pathlib import Path
 
 import numpy as np
@@ -62,5 +63,5 @@ print(f"Test Accuracy: {accuracy*100:.2f}%")
 
 pkl_filename = "model.pkl"
 
-with open(pkl_file_model, 'wb') as file:
+with open(pkl_filename, 'wb') as file:
     pickle.dump(model, file)
