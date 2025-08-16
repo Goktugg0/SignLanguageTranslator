@@ -56,3 +56,11 @@ fitting = model.fit(
     callbacks=[early_stop],
     verbose=2
 )
+
+loss, accuracy = model.evaluate(X_test, y_test, verbose=0)
+print(f"Test Accuracy: {accuracy*100:.2f}%")
+
+pkl_filename = "model.pkl"
+
+with open(pkl_file_model, 'wb') as file:
+    pickle.dump(model, file)
