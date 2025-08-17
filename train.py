@@ -36,11 +36,11 @@ X_train, X_test, y_train, y_test = train_test_split(X_scaled, y_encoded, test_si
 
 
 model = Sequential([
-    Dense(64, activation='relu', input_shape=(63,)),
+    Dense(256, activation='relu', input_shape=(63,)),
     Dropout(0.3),
-    Dense(32, activation='relu'),
+    Dense(128, activation='relu'),
     Dropout(0.3),
-    Dense(16, activation='relu'),
+    Dense(64, activation='relu'),
     Dense(len(le.classes_), activation='softmax')
 ])
 
