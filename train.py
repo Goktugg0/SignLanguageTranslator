@@ -36,11 +36,11 @@ X_train, X_test, y_train, y_test = train_test_split(X_scaled, y_encoded, test_si
 
 
 model = Sequential([
-    Dense(256, activation='relu', input_shape=(63,)),
+    Dense(64, activation='relu', input_shape=(63,)),
     Dropout(0.3),
-    Dense(128, activation='relu'),
+    Dense(32, activation='relu'),
     Dropout(0.3),
-    Dense(64, activation='relu'),
+    Dense(16, activation='relu'),
     Dense(len(le.classes_), activation='softmax')
 ])
 
@@ -52,7 +52,7 @@ fitting = model.fit(
     X_train, y_train,
     validation_data=(X_test, y_test),
     batch_size=16,
-    epochs=500,
+    epochs=1000,
     shuffle=True,
     callbacks=[early_stop],
     verbose=2
@@ -60,5 +60,11 @@ fitting = model.fit(
 
 loss, accuracy = model.evaluate(X_test, y_test, verbose=0)
 print(f"Test Accuracy: {accuracy*100:.2f}%")
+
+with open("scaler.pkl", "wb") as f:
+    pickle.dump(scaler, f)
+
+with open("label_encoder.pkl", "wb") as f:
+    pickle.dump(le, f)
 
 model.save("model.keras")
