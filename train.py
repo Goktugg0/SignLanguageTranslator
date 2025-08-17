@@ -61,7 +61,4 @@ fitting = model.fit(
 loss, accuracy = model.evaluate(X_test, y_test, verbose=0)
 print(f"Test Accuracy: {accuracy*100:.2f}%")
 
-pkl_filename = "model.pkl"
-
-with open(pkl_filename, 'wb') as file:
-    pickle.dump(model, file)
+model.save("model.keras")
