@@ -68,7 +68,7 @@ class HandDetector:
 
 
 def main():
-    SIGN_LABEL = "space"  # Change for each sign
+    SIGN_LABEL = "t"  # Change for each sign
     file_path = "sign_data.csv"
 
     detector = HandDetector()
