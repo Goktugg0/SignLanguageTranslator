@@ -4,6 +4,12 @@ import mediapipe as mp
 import cv2 as cv
 
 class HandDetector:
+    """"
+    The class to create hand landmarks and collects it with openCv and mediapipe.
+    It can return the raw frame with landmarks drawn, and convert detected landmarks
+    into a flattened list. Also, the class itself allows for further project creation involving hand
+    and/or arm tracker, such as trained sport coaches for individuals.
+    """
     def __init__(self, static_image_mode=False,
                       max_num_hands=1,
                       model_complexity=1,
@@ -29,6 +35,9 @@ class HandDetector:
         os.makedirs(self.data_dir, exist_ok=True)
 
     def read_frame(self):
+        """This function is to convert the data to mediapipe format and check for sensible values.
+           Returns the converted result and the Handmarks drawn frame"""
+
         ret, frame = self.cap.read()
         if not ret:
             return None, None
@@ -43,10 +52,11 @@ class HandDetector:
                 self.mpDraw.draw_landmarks(frame, lm, self.mpHands.HAND_CONNECTIONS)
         return frame, results
 
-    def landmarks_to_list(self, results):
-        """Return flattened list of 126 values (2 hands * 21 landmarks * 3 coords).
-           If a hand is missing, fill with zeros."""
-        output = []
+    @staticmethod
+    def landmarks_to_list(results):
+        """Return flattened list of 126 values (2 hands * 21 landmarks * 3 cords).
+           If a hand is missing, fill with zeros. It is called with objects but can be independent
+           of any objects."""
         if results.multi_hand_landmarks:
             hands_data = []
             for handLms in results.multi_hand_landmarks:
@@ -63,13 +73,14 @@ class HandDetector:
 
 
     def release(self):
+        # Releases the use of the cap and destroys on exit
         self.cap.release()
         cv.destroyAllWindows()
 
 
 def main():
-    SIGN_LABEL = "t"  # Change for each sign
-    file_path = "sign_data.csv"
+    SIGN_LABEL = "t"  # For specifying each sign
+    file_path = "sign_data.csv" # Collected csv data for training
 
     detector = HandDetector()
 
@@ -85,10 +96,11 @@ def main():
 
         cv.putText(frame, f"Collecting: {SIGN_LABEL}", (10, 30),
                    cv.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+        # Checking in each tick
         if frame is None:
             break
 
-        # Example: print number of detected hands
         if results.multi_hand_landmarks:
             print(results.multi_hand_landmarks)
 
