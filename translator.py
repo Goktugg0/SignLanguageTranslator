@@ -1,11 +1,8 @@
 import pickle
-from pathlib import Path
-
 import cv2 as cv
 import keras
 import numpy as np
-import pandas as pd
-import mediapipe as mp
+
 
 from handDetector import HandDetector
 
@@ -36,11 +33,11 @@ while True:
 
         # Predict
         predicted = model.predict(landmarks_scaled, verbose=0)
-        pred_index = np.argmax(predicted)
-        pred_label = le.inverse_transform([pred_index])[0]  # decode label
+        predicted_index = np.argmax(predicted)
+        predicted_label = le.inverse_transform([predicted_index])[0]  # decode label
         confidence = np.max(predicted)
 
-        text = f"{pred_label} ({confidence:.2f})"
+        text = f"{predicted_label} ({confidence:.2f})"
         cv.putText(frame, text, (10, 40), cv.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
     cv.imshow("Sign Language Translator", frame)
 

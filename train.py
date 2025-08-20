@@ -1,17 +1,12 @@
 import pickle
 from pathlib import Path
-
-import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.metrics import categorical_crossentropy
-from tensorflow import keras
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Activation, Dropout, Flatten, Conv2D, MaxPooling2D
-import tensorflow as tf
+from tensorflow.keras.layers import Dense, Dropout
 
 data = Path("sign_data.csv")
 
@@ -62,9 +57,11 @@ loss, accuracy = model.evaluate(X_test, y_test, verbose=0)
 print(f"Test Accuracy: {accuracy*100:.2f}%")
 
 with open("scaler.pkl", "wb") as f:
+    # noinspection PyTypeChecker
     pickle.dump(scaler, f)
 
 with open("label_encoder.pkl", "wb") as f:
+    # noinspection PyTypeChecker
     pickle.dump(le, f)
 
 model.save("model.keras")
