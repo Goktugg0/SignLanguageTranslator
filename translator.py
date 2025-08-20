@@ -1,12 +1,10 @@
 import pickle
+
 import cv2 as cv
 import keras
 import numpy as np
 
-
 from handDetector import HandDetector
-
-"Will load the model and test it in real time"
 
 model = keras.models.load_model("model.keras")
 with open("scaler.pkl", "rb") as f:
@@ -45,3 +43,4 @@ while True:
         break
 
 detector.release()
+
