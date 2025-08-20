@@ -1,7 +1,7 @@
 import csv
-import os
-import mediapipe as mp
 import cv2 as cv
+import mediapipe as mp
+import os
 
 class HandDetector:
     """"
