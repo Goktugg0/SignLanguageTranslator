@@ -27,7 +27,7 @@ For further information and detail see pydocs.
    python handDetector.py
   ```
   Collect data by pressing "s" on your keyboard to save a few signs while you do the sign in front of the camera. (20-30 saves for each sign would be sufficient)
-  ![](https://github.com/SignLanguageTranslator/gifs/handDetector.gif)
+  ![](gifs/handDetector.gif)
 
 **2. Train the model**
 
@@ -36,7 +36,7 @@ For further information and detail see pydocs.
    python train.py
   ```
   The code will train and save the model in the most accurate way and print out the accuracy of the created model.
-  ![](https://github.com/SignLanguageTranslator/gifs/train.gif)
+  ![](gifs/train.gif)
 
 **3. Translate signs in real-time**
 
@@ -45,7 +45,7 @@ For further information and detail see pydocs.
    python translate.py
   ```
   This script will open a window that will translate the signs that you trained by typing them on the screen as well as with its certainity.
-  ![](https://github.com/SignLanguageTranslator/gifs/translator.gif)
+  ![](gifs/translator.gif)
 
 
 ## Dependencies
