@@ -79,7 +79,7 @@ class HandDetector:
 
 
 def main():
-    SIGN_LABEL = "t"  # For specifying each sign
+    SIGN_LABEL = "u"  # For specifying each sign
     file_path = "sign_data.csv" # Collected csv data for training
 
     detector = HandDetector()

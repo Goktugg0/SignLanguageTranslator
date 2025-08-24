@@ -55,7 +55,7 @@ def build_model(input_dim: int, num_classes: int):
     return model
 
 def train_model(model, x_train, y_train, x_test, y_test):
-    """"Train the model couple times until performance starts going down."""
+    """Train the model couple times until performance starts going down."""
     early_stop = EarlyStopping(monitor='val_loss', patience=20, restore_best_weights=True)
 
     fitting = model.fit(
