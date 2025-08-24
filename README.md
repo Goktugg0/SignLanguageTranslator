@@ -8,7 +8,6 @@ It is built with Python, OpevCV, Mediapipe, TensorFlow/Keras, and scikit-learn.
 ## Project Structure
 SignLanguageTranslator/<br />
 │ <br />
-├── collected_signs/ # Folder containing landmarks of hand signs <br />
 ├── handDetector.py # Script to detect hands live and allow user to save every hand sign they want <br />
 ├── label_encoder.pkl # Encodes sign labels for training/inference <br />
 ├── model.keras # Trained Keras model for sign recognition <br />
