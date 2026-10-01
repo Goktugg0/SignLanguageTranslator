@@ -1,5 +1,7 @@
 # Hand Sign Recognition & Translator
 
+NOTE: This project was a version that I did by myself in couple months. This project continues in a private repository with student team Serpentine AI.
+
 This project uses computer vision and deep learning to recognize hand gestures/signs and translate them into text live.
 It is built with Python, OpevCV, Mediapipe, TensorFlow/Keras, and scikit-learn. 
 
